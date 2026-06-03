@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Owen B. Subreviga | Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --brown-deep:#3b2a1a;
+    --brown-mid:#6b4226;
+    --brown-warm:#a0622a;
+    --beige-dark:#c9a97a;
+    --beige-mid:#e8d5b7;
+    --beige-light:#f5ede0;
+    --beige-pale:#faf6f0;
+    --text-primary:#2a1a0e;
+    --text-secondary:#6b4c30;
+    --text-muted:#9b7a5a;
+    --accent:#c47d3a;
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:'DM Sans',sans-serif;background:var(--beige-pale);color:var(--text-primary);overflow-x:hidden}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:20px 48px;background:rgba(250,246,240,0.9);backdrop-filter:blur(12px);border-bottom:1px solid rgba(161,98,42,0.12)}
+  .nav-logo{font-family:'Playfair Display',serif;font-size:20px;color:var(--brown-deep);letter-spacing:-0.02em}
+  .nav-links{display:flex;gap:32px;list-style:none}
+  .nav-links a{font-size:13px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-secondary);text-decoration:none;transition:color 0.2s}
+  .nav-links a:hover{color:var(--brown-warm)}
+
+  /* HERO */
+  #hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:120px 48px 80px;position:relative;overflow:hidden}
+  .hero-bg-text{position:absolute;right:-40px;top:50%;transform:translateY(-50%);font-family:'Playfair Display',serif;font-size:clamp(120px,22vw,280px);font-weight:700;color:rgba(161,98,42,0.06);white-space:nowrap;pointer-events:none;user-select:none;letter-spacing:-0.04em;line-height:1}
+  .hero-tag{display:inline-block;font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);border:1px solid var(--beige-dark);padding:6px 14px;border-radius:40px;margin-bottom:28px;width:fit-content;animation:fadeUp 0.7s ease both}
+  .hero-name{font-family:'Playfair Display',serif;font-size:clamp(48px,8vw,100px);font-weight:700;line-height:1.0;letter-spacing:-0.03em;color:var(--brown-deep);animation:fadeUp 0.8s 0.1s ease both}
+  .hero-name em{font-style:italic;color:var(--brown-warm)}
+  .hero-sub{font-size:clamp(15px,2vw,18px);font-weight:300;color:var(--text-secondary);max-width:560px;line-height:1.75;margin-top:24px;animation:fadeUp 0.8s 0.2s ease both}
+  .hero-cta{display:flex;gap:16px;margin-top:40px;flex-wrap:wrap;animation:fadeUp 0.8s 0.3s ease both}
+  .btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--brown-mid);color:#faf6f0;padding:14px 28px;border-radius:4px;font-size:13px;font-weight:500;letter-spacing:0.04em;text-decoration:none;border:none;cursor:pointer;transition:background 0.2s,transform 0.15s}
+  .btn-primary:hover{background:var(--brown-deep);transform:translateY(-1px)}
+  .btn-outline{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--brown-mid);padding:14px 28px;border-radius:4px;border:1.5px solid var(--beige-dark);font-size:13px;font-weight:500;letter-spacing:0.04em;text-decoration:none;cursor:pointer;transition:border-color 0.2s,color 0.2s,transform 0.15s}
+  .btn-outline:hover{border-color:var(--brown-warm);color:var(--brown-warm);transform:translateY(-1px)}
+  .hero-scroll{position:absolute;bottom:40px;left:48px;display:flex;align-items:center;gap:10px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted)}
+  .hero-scroll::before{content:'';display:block;width:40px;height:1px;background:var(--beige-dark)}
+
+  /* SECTIONS */
+  section{padding:100px 48px}
+  .section-label{font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+  .section-title{font-family:'Playfair Display',serif;font-size:clamp(32px,5vw,52px);font-weight:700;line-height:1.1;letter-spacing:-0.02em;color:var(--brown-deep);margin-bottom:48px}
+  .divider{width:60px;height:2px;background:var(--beige-dark);margin-bottom:32px;border-radius:1px}
+
+  /* ABOUT */
+  #about{background:var(--beige-light)}
+  .about-grid{display:grid;grid-template-columns:1fr;gap:48px;align-items:start}
+  .about-top{display:flex;align-items:center;gap:40px;flex-wrap:wrap}
+  .about-photo-wrap{flex-shrink:0}
+  .about-photo{
+    width:160px;
+    height:160px;
+    object-fit:cover;
+    object-position:top center;
+    border-radius:50%;
+    display:block;
+    filter:sepia(8%) contrast(1.04);
+    border:3px solid var(--beige-dark);
+    box-shadow:0 8px 32px rgba(59,42,26,0.15);
+  }
+  .about-intro{flex:1;min-width:240px}
+  .about-name{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--brown-deep);margin-bottom:6px}
+  .about-role{font-size:13px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+  .about-text p{font-size:16px;font-weight:300;line-height:1.85;color:var(--text-secondary);margin-bottom:16px}
+  .about-text p strong{color:var(--brown-mid);font-weight:500}
+  .about-stats{display:flex;gap:32px;flex-wrap:wrap;padding-top:8px}
+  .stat-item{border-left:2px solid var(--beige-dark);padding:12px 0 12px 20px}
+  .stat-num{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:var(--brown-warm);line-height:1}
+  .stat-label{font-size:11px;color:var(--text-muted);margin-top:4px;letter-spacing:0.04em}
+
+  /* EXPERIENCE */
+  #experience{background:var(--beige-pale)}
+  .exp-list{display:flex;flex-direction:column;gap:40px}
+  .exp-item{border-left:2px solid var(--beige-dark);padding-left:32px;position:relative}
+  .exp-item::before{content:'';position:absolute;left:-6px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--brown-warm);border:2px solid var(--beige-pale)}
+  .exp-date{font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+  .exp-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--brown-deep);margin-bottom:4px}
+  .exp-company{font-size:13px;color:var(--text-muted);margin-bottom:14px}
+  .exp-bullets{list-style:none;display:flex;flex-direction:column;gap:8px}
+  .exp-bullets li{font-size:14px;font-weight:300;color:var(--text-secondary);line-height:1.65;padding-left:16px;position:relative}
+  .exp-bullets li::before{content:'—';position:absolute;left:0;color:var(--beige-dark)}
+
+  /* PROJECTS */
+  #projects{background:var(--beige-light)}
+  .projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px}
+  .project-card{background:var(--beige-pale);border:1px solid rgba(161,98,42,0.12);border-radius:6px;overflow:hidden;transition:transform 0.22s,box-shadow 0.22s;cursor:pointer}
+  .project-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(59,42,26,0.12)}
+  .card-thumb{height:160px;display:flex;align-items:center;justify-content:center;font-size:48px}
+  .card-thumb-elscis{background:linear-gradient(135deg,#3b2a1a 0%,#6b4226 100%)}
+  .card-thumb-net{background:linear-gradient(135deg,#5a3818 0%,#a0622a 100%)}
+  .card-thumb-design{background:linear-gradient(135deg,#2a1a0e 0%,#4a2e12 100%)}
+  .card-body{padding:22px}
+  .card-tag{font-size:10px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+  .card-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--brown-deep);margin-bottom:8px}
+  .card-desc{font-size:13px;font-weight:300;line-height:1.7;color:var(--text-secondary);margin-bottom:16px}
+  .card-link{font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--brown-warm);text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:gap 0.2s}
+  .card-link:hover{gap:10px}
+
+  /* SKILLS */
+  #skills{background:var(--brown-deep);color:var(--beige-pale)}
+  #skills .section-title{color:var(--beige-mid)}
+  #skills .section-label{color:var(--beige-dark)}
+  .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+  .skill-group{background:rgba(255,255,255,0.04);border:1px solid rgba(201,169,122,0.12);padding:32px}
+  .skill-group-title{font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--beige-dark);margin-bottom:20px}
+  .skill-list{list-style:none;display:flex;flex-direction:column;gap:12px}
+  .skill-list li{font-size:15px;font-weight:300;color:var(--beige-mid);display:flex;align-items:center;gap:10px}
+  .skill-list li::before{content:'';display:block;width:6px;height:6px;border-radius:50%;background:var(--beige-dark);flex-shrink:0}
+
+  /* CERTIFICATIONS */
+  #certifications{background:var(--beige-light)}
+  .cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+  .cert-card{background:var(--beige-pale);border:1px solid rgba(161,98,42,0.12);border-radius:6px;padding:28px;display:flex;gap:20px;align-items:flex-start;transition:transform 0.2s,box-shadow 0.2s}
+  .cert-card:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(59,42,26,0.1)}
+  .cert-icon{width:44px;height:44px;border-radius:8px;background:var(--brown-mid);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+  .cert-name{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--brown-deep);margin-bottom:4px}
+  .cert-org{font-size:12px;color:var(--text-muted);margin-bottom:4px}
+  .cert-date{font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent)}
+
+  /* CONTACT */
+  #contact{background:var(--beige-pale)}
+  .contact-inner{max-width:640px}
+  .contact-inner .section-title{margin-bottom:24px}
+  .contact-tagline{font-size:16px;font-weight:300;line-height:1.7;color:var(--text-secondary);margin-bottom:40px}
+  .contact-links{display:flex;flex-wrap:wrap;gap:12px}
+  .contact-chip{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border:1.5px solid var(--beige-dark);border-radius:40px;font-size:13px;font-weight:500;color:var(--brown-mid);text-decoration:none;transition:background 0.2s,border-color 0.2s,transform 0.15s}
+  .contact-chip:hover{background:var(--brown-mid);color:var(--beige-pale);border-color:var(--brown-mid);transform:translateY(-1px)}
+  .contact-chip span{font-size:16px}
+
+  /* FOOTER */
+  footer{background:var(--brown-deep);padding:32px 48px;display:flex;align-items:center;justify-content:space-between}
+  .footer-logo{font-family:'Playfair Display',serif;font-size:16px;color:var(--beige-mid)}
+  .footer-copy{font-size:12px;color:var(--text-muted)}
+
+  @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+  @media(max-width:700px){
+    nav{padding:16px 24px}
+    .nav-links{display:none}
+    section{padding:72px 24px}
+    #hero{padding:100px 24px 72px}
+    .about-grid{grid-template-columns:1fr;gap:40px}
+    .about-stats{gap:20px}
+    .skills-grid{grid-template-columns:1fr}
+    footer{flex-direction:column;gap:8px;text-align:center}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Owen.</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#certifications">Certs</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-text">OBS</div>
+  <div class="hero-tag">Open for opportunities</div>
+  <h1 class="hero-name">Owen B.<br><em>Subreviga.</em></h1>
+  <p class="hero-sub">A detail-oriented IT graduate with experience in system documentation, technical writing, and system analysis. Knowledgeable in basic networking with some experience in graphic design and poster creation — based in Negros Oriental, PH.</p>
+  <div class="hero-cta">
+    <a href="#projects" class="btn-primary">View my work ↓</a>
+    <a href="#contact" class="btn-outline">Get in touch</a>
+  </div>
+  <div class="hero-scroll">Scroll to explore</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">About me</div>
+  <div class="divider"></div>
+  <div class="about-grid">
+    <div class="about-top">
+      <div class="about-photo-wrap">
+        <img src="photo.jpg" alt="Owen B. Subreviga" class="about-photo">
+      </div>
+      <div class="about-intro">
+        <div class="about-name">Owen B. Subreviga</div>
+        <div class="about-role">IT Graduate · Negros Oriental, PH</div>
+      </div>
+    </div>
+    <div class="about-text">
+      <p>I'm a fresh <strong>BS Information Technology graduate</strong> from Negros Oriental State University, Bayawan-Sta. Catalina Campus. My capstone project — <strong>ELSCIS</strong> — was a real loan screening system deployed at DCCCO Bayawan Branch, where I handled documentation, flowcharting, and system analysis.</p>
+      <p>I also completed <strong>700 hours of OJT</strong> at HDJ Bayawan Agri-Venture Corp where I worked hands-on with network configurations and security camera installations. Outside of IT, I create in <strong>Photoshop and Canva</strong>, and I'm building toward freelance work.</p>
+    </div>
+    <div class="about-stats">
+      <div class="stat-item">
+        <div class="stat-num">700</div>
+        <div class="stat-label">OJT hours completed</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">1</div>
+        <div class="stat-label">Deployed system</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">2026</div>
+        <div class="stat-label">NORSU Graduate</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">Where I've been</div>
+  <h2 class="section-title">Experience</h2>
+  <div class="exp-list">
+    <div class="exp-item">
+      <div class="exp-date">2025 – 2026</div>
+      <div class="exp-title">Information Systems Intern</div>
+      <div class="exp-company">HDJ Bayawan Agri-Venture Corp — Bayawan City, Negros Oriental</div>
+      <ul class="exp-bullets">
+        <li>Configured and maintained network connections to ensure stable internet connectivity across company facilities</li>
+        <li>Installed network cables and set up security cameras to support company operations and monitoring</li>
+        <li>Rendered 700 hours of on-the-job training</li>
+      </ul>
+    </div>
+    <div class="exp-item">
+      <div class="exp-date">2024 – 2026</div>
+      <div class="exp-title">Capstone Project — ELSCIS</div>
+      <div class="exp-company">Negros Oriental State University · Deployed at DCCCO Bayawan Branch</div>
+      <ul class="exp-bullets">
+        <li>Assisted in system documentation and technical writing for a loan screening system deployed at a real cooperative</li>
+        <li>Developed process flowcharts covering multiple user roles including Admin, Loan Officer, and CI Staff</li>
+        <li>Supported system evaluation using ISO/IEC 25010 software quality framework</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">Selected work</div>
+  <h2 class="section-title">Projects</h2>
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="card-thumb card-thumb-elscis">💾</div>
+      <div class="card-body">
+        <div class="card-tag">Capstone · System Analysis</div>
+        <div class="card-title">ELSCIS</div>
+        <p class="card-desc">Electronic Loan Screening & Credit Interview System deployed at DCCCO Bayawan Branch. Handled documentation, flowcharting, and system analysis.</p>
+        <a href="#" class="card-link">View details →</a>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="card-thumb card-thumb-net">🌐</div>
+      <div class="card-body">
+        <div class="card-tag">Networking · OJT</div>
+        <div class="card-title">Network & CCTV Setup</div>
+        <p class="card-desc">Hands-on network cable installation, configuration, and security camera setup across facilities at HDJ Bayawan Agri-Venture Corp.</p>
+        <a href="#" class="card-link">View details →</a>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="card-thumb card-thumb-design">🎨</div>
+      <div class="card-body">
+        <div class="card-tag">Graphic Design · Photoshop</div>
+        <div class="card-title">Poster & Design Work</div>
+        <p class="card-desc">Posters and digital artworks created in Adobe Photoshop and Canva. Layout, color, and visual design for various projects.</p>
+        <a href="#" class="card-link">See designs →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">What I work with</div>
+  <h2 class="section-title">Skills</h2>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <div class="skill-group-title">IT & Networking</div>
+      <ul class="skill-list">
+        <li>Network Configuration</li>
+        <li>Cable Installation</li>
+        <li>Security Camera Setup</li>
+        <li>Basic Cybersecurity</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Analysis & Docs</div>
+      <ul class="skill-list">
+        <li>System Analysis</li>
+        <li>Process Flowcharting</li>
+        <li>Technical Writing</li>
+        <li>ISO/IEC 25010</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Design & Tools</div>
+      <ul class="skill-list">
+        <li>Adobe Photoshop</li>
+        <li>Canva</li>
+        <li>Microsoft Word & PowerPoint</li>
+        <li>Poster Creation</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-label">Credentials</div>
+  <h2 class="section-title">Certifications</h2>
+  <div class="cert-grid">
+    <div class="cert-card">
+      <div class="cert-icon">🛡️</div>
+      <div class="cert-info">
+        <div class="cert-name">Cybersecurity Bootcamp</div>
+        <div class="cert-org">SKILLOGIC — EC-Council Accredited</div>
+        <div class="cert-date">September 2024</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">💼</div>
+      <div class="cert-info">
+        <div class="cert-name">OJT Certificate</div>
+        <div class="cert-org">HDJ Bayawan Agri-Venture Corp</div>
+        <div class="cert-date">2025 – 2026</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">Let's connect</div>
+  <div class="contact-inner">
+    <h2 class="section-title">Get in touch</h2>
+    <p class="contact-tagline">Looking for someone for IT work, documentation, or design? I'm open to local jobs, freelance, and remote opportunities. Let's talk.</p>
+    <div class="contact-links">
+      <a href="mailto:owensubreviga@gmail.com" class="contact-chip"><span>✉️</span> owensubreviga@gmail.com</a>
+      <a href="tel:+639510555625" class="contact-chip"><span>📱</span> +63 951 055 5625</a>
+      <a href="#" class="contact-chip"><span>🛒</span> Fiverr</a>
+      <a href="#" class="contact-chip"><span>📄</span> Download CV</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Owen.</div>
+  <div class="footer-copy">© 2026 Owen B. Subreviga · Negros Oriental, PH</div>
+</footer>
+
+</body>
+</html>
